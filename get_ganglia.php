@@ -5,11 +5,18 @@
 # Assumes you have already called get_context.php.
 #
 
-if (! Gmetad($conf['ganglia_ip'], $conf['ganglia_port']) )
+if ($context == "meta" )
    {
-      print "<H4>There was an error collecting ganglia data ".
-         "(${conf['ganglia_ip']}:${conf['ganglia_port']}): $error</H4>\n";
-      exit;
+       error_log("use cache_meta: begins");
+       require dirname(__FILE__) . '/lib/cache_meta.php';
+       error_log("use cache_meta: end !!!");
+   } else {
+       if (! Gmetad($conf['ganglia_ip'], $conf['ganglia_port']) )
+          {
+             print "<H4>There was an error collecting ganglia data ".
+                "(${conf['ganglia_ip']}:${conf['ganglia_port']}): $error</H4>\n";
+             exit;
+          }
    }
 
 # If we have no child data sources, assume something is wrong.

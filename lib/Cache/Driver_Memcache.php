@@ -26,6 +26,31 @@ function g_cache_expire () {
 	return time() - $mc->get( 'ganglia_cache_timestamp_' . gethostname() );
 } // end function g_cache_expire
 
+function g_cache_meta_exists() {
+	$mc = g_get_memcache();
+	return $mc->get( 'ganglia_cache_meta_' . gethostname() ) !== FALSE;
+} // end function g_cache_exists
+
+function g_cache_meta_serialize($data) {
+	global $conf;
+	$mc = g_get_memcache();
+	$mc->set( 'ganglia_cache_meta_' . gethostname() , $data );
+	$mc->set( 'ganglia_cache_meta_timestamp_' . gethostname(), time() );
+} // end function g_cache_serialize
+
+function g_cache_meta_deserialize() {
+	global $conf;
+	$mc = g_get_memcache();
+	$meta_array = $mc->get( 'ganglia_cache_meta_' . gethostname() );
+	return $meta_array;
+} // end function g_cache_deserialize
+
+function g_cache_meta_expire () {
+	global $conf;
+	$mc = g_get_memcache();
+	return time() - $mc->get( 'ganglia_cache_meta_timestamp_' . gethostname() );
+} // end function g_cache_expire
+
 function g_get_memcache() {
 	global $conf;
 	if (!$GLOBALS['__memcached_pool']) {
