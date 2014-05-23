@@ -105,8 +105,13 @@ function start_meta ($parser, $tagname, $attrs)
             break;
 
          case "METRICS":
+            # TO-BE-CHECK: for $context=meta, it seems only need the metric of "cpu_num"
             $metricname = rawurlencode($attrs['NAME']);
-            $metrics[$sourcename][$metricname] = $attrs;
+            #$metrics[$sourcename][$metricname] = $attrs;
+            if ($metricname == "cpu_num") {
+                $metrics[$sourcename][$metricname] = $attrs;
+            }
+
             break;
 
          case "HOSTS":

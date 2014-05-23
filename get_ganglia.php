@@ -7,9 +7,7 @@
 
 if ($context == "meta" )
    {
-       error_log("use cache_meta: begins");
        require dirname(__FILE__) . '/lib/cache_meta.php';
-       error_log("use cache_meta: end !!!");
    } else {
        if (! Gmetad($conf['ganglia_ip'], $conf['ganglia_port']) )
           {
