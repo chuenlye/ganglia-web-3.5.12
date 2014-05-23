@@ -24,7 +24,7 @@ function g_cache_expire () {
 
 function g_cache_meta_exists() {
 	global $conf;
-	return file_exists( $conf['cachefile'] + ".meta" );
+	return file_exists( $conf['cachefile'] . ".meta" );
 } // end function g_cache_exists
 
 function g_cache_meta_serialize($data) {
