@@ -105,10 +105,11 @@ function start_meta ($parser, $tagname, $attrs)
             break;
 
          case "METRICS":
-            # TO-BE-CHECK: for $context=meta, it seems only need the metric of "cpu_num"
+            # TO-BE-CHECK: for $context=meta(grid summary in front page), it seems only needs these four metrics 
             $metricname = rawurlencode($attrs['NAME']);
             #$metrics[$sourcename][$metricname] = $attrs;
-            if ($metricname == "cpu_num") {
+            $must_metrics = array('cpu_num', 'load_one', 'load_five', 'load_fifteen');
+            if (in_array($metricname, $must_metrics)) {
                 $metrics[$sourcename][$metricname] = $attrs;
             }
 
